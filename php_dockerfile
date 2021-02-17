@@ -1,0 +1,9 @@
+FROM php:7.4-apache
+COPY src/ /var/www/html/
+WORKDIR /var/www/html/
+RUN docker-php-ext-install mysqli 
+RUN docker-php-ext-enable mysqli
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 774 /var/www/html
+ADD apache-config.conf /etc/apache2/sites-enabled/00-default.conf
+EXPOSE 80
