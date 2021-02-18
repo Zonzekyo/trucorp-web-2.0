@@ -2,22 +2,19 @@
 $servername = "172.20.0.2";
 $username = "root";
 $password = "secretpassword";
-$dbname = "Trucorp";
+$dbname = "mysql";
+
 
 $conn = new mysqli($servername, $username, $password, $dbname);
+
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM users";
+$sql = "SELECT * FROM user";
 $result = $conn->query($sql);
+$jumlah_user = $result->num_rows;
+echo "Jumlah user pada database: $jumlah_user user";
 
-if ($result->num_rows > 0) {
-  while($row = $result->fetch_assoc()) {
-    echo "ID: " . $row["ID"]. "<br> - Nama: " . $row["Nama"]. "<br> kantor " . $row["Kantor(Pusat/Cabang)"]. "<br> <br>";
-  }
-} else {
-  echo "no results";
-}
 $conn->close();
 ?>
